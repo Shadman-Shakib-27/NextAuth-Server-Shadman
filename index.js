@@ -34,7 +34,7 @@ async function run() {
       if (existingUser) {
         return res.status(400).json({
           success: false,
-          message: "User already exists!!!",
+          message: "This User Already Exists!!!",
         });
       }
 
@@ -51,7 +51,7 @@ async function run() {
 
       res.status(201).json({
         success: true,
-        message: "User registered successfully!",
+        message: "User Registered Successfully!",
       });
     });
 
@@ -62,13 +62,13 @@ async function run() {
       // Find user by email
       const user = await collection.findOne({ email });
       if (!user) {
-        return res.status(401).json({ message: "Invalid email or password" });
+        return res.status(401).json({ message: "Invalid Email or Password" });
       }
 
       // Compare hashed password
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
-        return res.status(401).json({ message: "Invalid email or password" });
+        return res.status(401).json({ message: "Invalid Email or Password" });
       }
 
       // Generate JWT token
@@ -90,7 +90,7 @@ async function run() {
     // Test route
     app.get("/", (req, res) => {
       const serverStatus = {
-        message: "Shadman's NEXT JS Server is running smoothly",
+        message: "Shadman's NEXT JS Auth Server is Running Smoothly",
         timestamp: new Date(),
       };
       res.json(serverStatus);
